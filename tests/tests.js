@@ -21,6 +21,7 @@ QUnit.test("late rate", function(assert) {
 });
 
 QUnit.test("calculate pay for shift segment", function(assert) {
-	assert.equal(getSegmentPay(7, 9, 12), 24, "Early pay rate is " + 24);
-	assert.equal(getSegmentPay(9, 12, 8), 24, "Mid pay rate is " + 24);
+	assert.equal(getSegmentPay(1, 4, earlyRate), 36, "Early pay rate is " + 36);  //1==6pm, 4==9pm
+	assert.equal(getSegmentPay(4, 7, midRate), 24, "Mid pay rate is " + 24);		//4==9pm, 7==12am	
+	assert.equal(getSegmentPay(7, 9, lateRate), 32, "Late pay rate is " + 32);	//7==12am, 9==2am
 });
