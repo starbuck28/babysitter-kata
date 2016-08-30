@@ -31,3 +31,6 @@ QUnit.test("function converts value string to number", function(assert) {
 	assert.equal(convertValue("11"), 11, "Number is " + 11);
 });
 
+QUnit.test("calculates total pay", function(assert) {
+	assert.equal(calculateTotal(36, 24, 32), 92, "Total pay is " + 92 );
+});
