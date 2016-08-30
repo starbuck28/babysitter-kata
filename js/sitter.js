@@ -20,3 +20,9 @@ function getSegmentPay(time1, time2, payrate) {
 }
 
 
+function convertValue(string) {
+	var number = parseInt(string);
+	return number;
+	
+}
+
