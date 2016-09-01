@@ -21,17 +21,34 @@ var midRate = 8;
 //Pay rate from 12 am to 4 am
 var lateRate = 16;
 
+//Sets start time 
+function getStartTime() {
+	var $start = $("#start-time");
+	startTime = $start.value;
+}
 
-//Calculates pay for shift segment
-function getSegmentPay(time1, time2, payrate) {
-	var segmentPay = (time2 - time1) * payrate;
-	return segmentPay;
+//Sets bedtime
+function getBedtime() {
+	var $bed = $("#bedtime");
+	bedtime = $bed.value;
+}
+
+//Sets end time
+function getEndTime() {
+	var $end = $("#end-time");
+	endTime = $end.value;
 }
 
 //Converts option string value to number
 function convertValue(string) {
 	var number = parseInt(string);
 	return number;
+}
+
+//Calculates pay for shift segment
+function getSegmentPay(time1, time2, payrate) {
+	var segmentPay = (time2 - time1) * payrate;
+	return segmentPay;
 }
 
 //Calculates total pay
