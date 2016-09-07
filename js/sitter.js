@@ -4,6 +4,8 @@ var startTime;
 var endTime;
 //Default bedtime
 var bedtime;
+//Midnight
+var midnight = 7;
 //Pay for entire shift
 var totalPay;
 
@@ -23,20 +25,22 @@ var lateRate = 16;
 
 //Sets start time 
 function getStartTime() {
-	var $start = $("#start-time");
-	startTime = $start.value;
+	var $start = document.getElementById("start-time");
+	startTime = $start.options[$start.selectedIndex].value;
 }
+
 
 //Sets bedtime
 function getBedtime() {
-	var $bed = $("#bedtime");
-	bedtime = $bed.value;
+	var $bed = document.getElementById("bedtime");
+	bedtime = $bed.options[$bed.selectedIndex].value;
 }
 
 //Sets end time
 function getEndTime() {
-	var $end = $("#end-time");
-	endTime = $end.value;
+	var $end = document.getElementById("end-time");
+	endTime = $end.options[$end.selectedIndex].value;
+	return endTime;
 }
 
 //Converts option string value to number
@@ -51,9 +55,25 @@ function getSegmentPay(time1, time2, payrate) {
 	return segmentPay;
 }
 
+
 //Calculates total pay
 function calculateTotal(pay1, pay2, pay3) {
 	totalPay = pay1 + pay2 + pay3;
 	return totalPay;
 }
 
+$(".submit-button").click(function() {
+		getStartTime();
+		getBedtime();
+		getEndTime();
+		startTime = convertValue(startTime);
+		bedtime = convertValue(bedtime);
+		endTime = convertValue(endTime);
+		earlyShiftTotal = getSegmentPay(startTime, bedtime, earlyRate);
+		midShiftTotal = getSegmentPay(bedtime, midnight, midRate);
+		lateShiftTotal = getSegmentPay(midnight, endTime, lateRate);
+		totalPay = calculateTotal(earlyShiftTotal, midShiftTotal, lateShiftTotal);
+		console.log(totalPay);
+	});
+	
+	
