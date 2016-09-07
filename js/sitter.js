@@ -23,6 +23,8 @@ var midRate = 8;
 //Pay rate from 12 am to 4 am
 var lateRate = 16;
 
+var html;
+
 //Sets start time 
 function getStartTime() {
 	var $start = document.getElementById("start-time");
@@ -62,6 +64,12 @@ function calculateTotal(pay1, pay2, pay3) {
 	return totalPay;
 }
 
+//Sets html for results div
+function showResults(pay) {
+	html = '<p>You will be paid $' + pay + ' for this shift.</p>';
+	return html;
+}
+
 $(".submit-button").click(function() {
 		getStartTime();
 		getBedtime();
@@ -73,7 +81,8 @@ $(".submit-button").click(function() {
 		midShiftTotal = getSegmentPay(bedtime, midnight, midRate);
 		lateShiftTotal = getSegmentPay(midnight, endTime, lateRate);
 		totalPay = calculateTotal(earlyShiftTotal, midShiftTotal, lateShiftTotal);
-		console.log(totalPay);
+		var showPay = showResults(totalPay);
+		$(".results").html(showPay);
 	});
 	
 	

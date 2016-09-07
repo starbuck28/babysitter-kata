@@ -64,3 +64,8 @@ QUnit.test("calculates total pay", function(assert) {
 });
 
 
+QUnit.test("sets html for total pay in results div", function(assert) {
+	assert.equal(showResults(100), html, "html is set for results div" );
+	});
+
+
