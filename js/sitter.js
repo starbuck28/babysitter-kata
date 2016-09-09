@@ -24,12 +24,13 @@ var midRate = 8;
 var lateRate = 16;
 
 var html;
-var submitButton;
+
 
 //Sets start time 
 function getStartTime() {
 	var $start = document.getElementById("start-time");
 	startTime = $start.options[$start.selectedIndex].value;
+	return startTime;
 }
 
 
@@ -37,10 +38,9 @@ function getStartTime() {
 function getBedtime() {
 	var $bed = document.getElementById("bedtime");
 	bedtime = $bed.options[$bed.selectedIndex].value;
-	if (bedtime < startTime) {
-		alert("Child's bedtime must be a time later than the start time. Please make another selection.");
+	return bedtime;
 	}
-}
+
 
 //Sets end time
 function getEndTime() {
