@@ -36,6 +36,9 @@ function getStartTime() {
 function getBedtime() {
 	var $bed = document.getElementById("bedtime");
 	bedtime = $bed.options[$bed.selectedIndex].value;
+	if (bedtime < startTime) {
+		alert("Child's bedtime must be a time later than the start time. Please make another selection.");
+	}
 }
 
 //Sets end time
@@ -70,13 +73,17 @@ function showResults(pay) {
 	return html;
 }
 
-$(".submit-button").click(function() {
-		getStartTime();
+
+getStartTime();
 		getBedtime();
 		getEndTime();
-		startTime = convertValue(startTime);
+startTime = convertValue(startTime);
 		bedtime = convertValue(bedtime);
 		endTime = convertValue(endTime);
+		
+$(".submit-button").click(function() {
+		
+		
 		earlyShiftTotal = getSegmentPay(startTime, bedtime, earlyRate);
 		midShiftTotal = getSegmentPay(bedtime, midnight, midRate);
 		lateShiftTotal = getSegmentPay(midnight, endTime, lateRate);

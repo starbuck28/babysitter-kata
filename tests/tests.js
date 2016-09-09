@@ -36,12 +36,12 @@ QUnit.test("option selected for start time is set to variable", function(assert)
 	assert.notDeepEqual(getStartTime(), startTime, "start time is set");
 	});
 		
-QUnit.test("option selected for bedtime is set to variable", function(assert) {
+QUnit.test("option selected for bedtime is set to variable and is greater than start time", function(assert) {
 	var $bed = document.getElementById("bedtime");
 	assert.notDeepEqual(getBedtime(), bedtime, "bedtime is set");
 	});
 
-QUnit.test("option selected for end time is set to variable", function(assert) {
+QUnit.test("option selected for end time is set to variable and is greater than start time & bedtime", function(assert) {
 	var $end = document.getElementById("end-time");
 	assert.equal(getEndTime(), endTime, "end time is set");
 	});
@@ -51,13 +51,11 @@ QUnit.test("function converts value string to number", function(assert) {
 	assert.equal(convertValue("11"), 11, "Number is " + 11);
 });
 
-QUnit.test("calculate pay for shift segment", function(assert) {
+QUnit.test("calculate pay for shift segment, should return a positive number or zero", function(assert) {
 	
 	assert.equal(getSegmentPay(1, 4, earlyRate), 36, "Early pay rate is " + 36);  //1==6pm, 4==9pm
 	assert.equal(getSegmentPay(4, 7, midRate), 24, "Mid pay rate is " + 24);		//4==9pm, 7==12am	
 	assert.equal(getSegmentPay(7, 9, lateRate), 32, "Late pay rate is " + 32);	//7==12am, 9==2am
-	
-});
 
 QUnit.test("calculates total pay", function(assert) {
 	assert.equal(calculateTotal(36, 24, 32), 92, "Total pay is " + 92 );
