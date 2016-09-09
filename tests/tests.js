@@ -29,7 +29,7 @@ QUnit.test("submit-button exists", function(assert) {
 		assert.ok($submitBtn, "button exists");
 	});
 	
-/*	
+	
 QUnit.test("option selected for start time is set to variable", function(assert) {
 	
 		var $start = document.getElementById("start-time");
@@ -71,4 +71,7 @@ QUnit.test("function checks if options are blank", function(assert) {
 	var buttonSubmit;
 		assert.equal(checkOptions(), true, "all options have been inspected");
 	});
-*/
+
+QUnit.test("if any options are blank, submit button is disabled", function(assert) {
+		assert.equal(disableButton(), disabled, "submit button is disabled");
+	});

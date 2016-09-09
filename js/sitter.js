@@ -24,6 +24,7 @@ var midRate = 8;
 var lateRate = 16;
 
 var html;
+var submitButton = false;
 
 
 //Sets start time 
@@ -49,11 +50,29 @@ function getEndTime() {
 	return endTime;
 }
 
+//Checks to see if any options are empty
 function checkOptions() {
 	if ($("#start-time").val() === "" || $("#end-time").val() === "" || $("#bedtime").val() === "")  {
 		submitButton = true;
 	}
 	return submitButton;
+}
+
+//Disables button if any options are empty
+function disableButton() {
+	if(submitButton) {
+		$(".submit-button").hide();
+		}
+	 $("#startTime").change(//function);
+	 $("#bedtime").change(//function);
+	 $("#end-time").change(//function);
+	}
+}
+
+function checkOptionValue(id) {
+	if(id.val()!== "") {
+		return true;
+	}
 }
 
 //Converts option string value to number
@@ -82,12 +101,15 @@ function showResults(pay) {
 }
 
 
+$(".submit-button").hide();
+disableButton();
 getStartTime();
-		getBedtime();
-		getEndTime();
+getBedtime();
+getEndTime();
+
 startTime = convertValue(startTime);
-		bedtime = convertValue(bedtime);
-		endTime = convertValue(endTime);
+bedtime = convertValue(bedtime);
+endTime = convertValue(endTime);
 		
 $(".submit-button").click(function() {
 		
