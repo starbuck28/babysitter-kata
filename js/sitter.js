@@ -24,6 +24,7 @@ var midRate = 8;
 var lateRate = 16;
 
 var html;
+var submitButton;
 
 //Sets start time 
 function getStartTime() {
@@ -46,6 +47,13 @@ function getEndTime() {
 	var $end = document.getElementById("end-time");
 	endTime = $end.options[$end.selectedIndex].value;
 	return endTime;
+}
+
+function checkOptions() {
+	if ($("#start-time").val() === "" || $("#end-time").val() === "" || $("#bedtime").val() === "")  {
+		submitButton = true;
+	}
+	return submitButton;
 }
 
 //Converts option string value to number

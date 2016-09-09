@@ -56,6 +56,7 @@ QUnit.test("calculate pay for shift segment, should return a positive number or 
 	assert.equal(getSegmentPay(1, 4, earlyRate), 36, "Early pay rate is " + 36);  //1==6pm, 4==9pm
 	assert.equal(getSegmentPay(4, 7, midRate), 24, "Mid pay rate is " + 24);		//4==9pm, 7==12am	
 	assert.equal(getSegmentPay(7, 9, lateRate), 32, "Late pay rate is " + 32);	//7==12am, 9==2am
+});
 
 QUnit.test("calculates total pay", function(assert) {
 	assert.equal(calculateTotal(36, 24, 32), 92, "Total pay is " + 92 );
@@ -66,4 +67,7 @@ QUnit.test("sets html for total pay in results div", function(assert) {
 	assert.equal(showResults(100), html, "html is set for results div" );
 	});
 
-
+QUnit.test("function checks if options are blank", function(assert) {
+	var buttonSubmit;
+		assert.equal(checkOptions(), true, "all options have been inspected");
+	});
