@@ -43,7 +43,7 @@ select {
 }
 
 
-input[type=button] {
+input[type=submit] {
 	width: 100%;
 	background-color: #FBB5C0;
 	border: none;

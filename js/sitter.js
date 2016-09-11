@@ -1,20 +1,9 @@
-//Default start time
-var startTime;
-//Default end time
-var endTime;
-//Default bedtime
-var bedtime;
-//Midnight
-var midnight = 7;
-//Pay for entire shift
-var totalPay;
 
-//Pay for early shift
-var earlyShiftTotal;
-//Pay for mid shift
-var midShiftTotal;
-//Pay for late shift
-var lateShiftTotal;
+var $start = document.getElementById("start-time");
+var $bed = document.getElementById("bedtime");
+var $end = document.getElementById("end-time");
+
+var midnight = 7;
 
 //Pay rate from 5pm to bedtime
 var earlyRate = 12;
@@ -23,57 +12,65 @@ var midRate = 8;
 //Pay rate from 12 am to 4 am
 var lateRate = 16;
 
-var html;
-var submitButton = false;
+
+var startTime, endTime, bedtime, totalPay, shift1Pay, shift2Pay, shift3Pay, html;
+
+
+
+
+
 
 
 //Sets start time 
 function getStartTime() {
-	var $start = document.getElementById("start-time");
 	startTime = $start.options[$start.selectedIndex].value;
+	console.log("start time: " + startTime)
 	return startTime;
 }
 
-
 //Sets bedtime
 function getBedtime() {
-	var $bed = document.getElementById("bedtime");
 	bedtime = $bed.options[$bed.selectedIndex].value;
+	console.log("bedtime: " + bedtime);
 	return bedtime;
 	}
 
-
 //Sets end time
 function getEndTime() {
-	var $end = document.getElementById("end-time");
 	endTime = $end.options[$end.selectedIndex].value;
+	console.log("end time: " + endTime);
 	return endTime;
 }
 
-//Checks to see if any options are empty
-function checkOptions() {
-	if ($("#start-time").val() === "" || $("#end-time").val() === "" || $("#bedtime").val() === "")  {
-		submitButton = true;
-	}
-	return submitButton;
-}
 
-//Disables button if any options are empty
-function disableButton() {
-	if(submitButton) {
-		$(".submit-button").hide();
-		}
-	 $("#startTime").change(//function);
-	 $("#bedtime").change(//function);
-	 $("#end-time").change(//function);
-	}
-}
+//Start of function calls
 
-function checkOptionValue(id) {
-	if(id.val()!== "") {
-		return true;
-	}
-}
+//Submit button is disabled by default
+$('input:submit').attr('disabled', true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 //Converts option string value to number
 function convertValue(string) {
@@ -101,8 +98,6 @@ function showResults(pay) {
 }
 
 
-$(".submit-button").hide();
-disableButton();
 getStartTime();
 getBedtime();
 getEndTime();
@@ -122,4 +117,4 @@ $(".submit-button").click(function() {
 		$(".results").html(showPay);
 	});
 	
-	
+	*/

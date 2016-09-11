@@ -29,9 +29,7 @@ QUnit.test("submit-button exists", function(assert) {
 		assert.ok($submitBtn, "button exists");
 	});
 	
-	
 QUnit.test("option selected for start time is set to variable", function(assert) {
-	
 		var $start = document.getElementById("start-time");
 	assert.equal(getStartTime(), "", "start time is set");
 	});
@@ -41,12 +39,16 @@ QUnit.test("option selected for bedtime is set to variable", function(assert) {
 	assert.equal(getBedtime(), "", "bedtime is set");
 	});
 
-QUnit.test("option selected for end time is set to variable and is greater than start time & bedtime", function(assert) {
+QUnit.test("option selected for end time is set to variable", function(assert) {
 	var $end = document.getElementById("end-time");
 	assert.equal(getEndTime(), "", "end time is set");
 	});
 
-QUnit.test("function converts value string to number", function(assert) {
+QUnit.test("submit button is disabled by default", function(assert) {
+	assert.ok($('input:submit').attr('disabled'), "submit button is disabled by default");
+	});
+
+/*QUnit.test("function converts value string to number", function(assert) {
 	assert.equal(convertValue("0"), 0, "Number is " + 0);
 	assert.equal(convertValue("11"), 11, "Number is " + 11);
 });
@@ -67,11 +69,4 @@ QUnit.test("sets html for total pay in results div", function(assert) {
 	assert.equal(showResults(100), html, "html is set for results div" );
 	});
 
-QUnit.test("function checks if options are blank", function(assert) {
-	var buttonSubmit;
-		assert.equal(checkOptions(), true, "all options have been inspected");
-	});
-
-QUnit.test("if any options are blank, submit button is disabled", function(assert) {
-		assert.equal(disableButton(), disabled, "submit button is disabled");
-	});
+*/
