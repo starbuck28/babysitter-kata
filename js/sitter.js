@@ -48,7 +48,15 @@ function getEndTime() {
 //Submit button is disabled by default
 $('input:submit').attr('disabled', true);
 
-
+$('#start-time, #bedtime, #end-time').change(
+  function() {
+    if($('#start-time').val() && $('#bedtime').val() && $('#end-time').val()) {
+      $('input:submit').attr('disabled', false);
+    } else {
+      $('input:submit').attr('disabled', true);
+    }
+  }
+);
 
 
 

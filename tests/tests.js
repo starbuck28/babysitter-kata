@@ -48,6 +48,19 @@ QUnit.test("submit button is disabled by default", function(assert) {
 	assert.ok($('input:submit').attr('disabled'), "submit button is disabled by default");
 	});
 
+
+	
+	
+	QUnit.test("option selection change", function(assert) {
+		var startVal = $('#start-time').val();
+		var bedVal = $('#bedtime').val();
+		var endVal = $('#end-time').val();
+		var doc = $(document);
+		doc.trigger($.Event("change", {startVal: 5, bedVal: 5, endVal: 5}));
+		assert.ok($('input:submit').attr('disabled'), "selections are number sna button is enabled");
+		});
+
+
 /*QUnit.test("function converts value string to number", function(assert) {
 	assert.equal(convertValue("0"), 0, "Number is " + 0);
 	assert.equal(convertValue("11"), 11, "Number is " + 11);
