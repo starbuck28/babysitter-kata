@@ -8,6 +8,7 @@ QUnit.test("sample test", function(assert) {
 assert.ok("1" == 1, "passed");
 });
 
+QUnit.module("check assigned variables exist", function() {
 QUnit.test("early rate", function(assert) {
 	assert.ok(earlyRate === 12, "early rate");
 });
@@ -28,45 +29,66 @@ QUnit.test("submit-button exists", function(assert) {
 		var $submitBtn = $(".submit-button");
 		assert.ok($submitBtn, "button exists");
 	});
-	
-QUnit.test("option selected for start time is set to variable", function(assert) {
-		var $start = document.getElementById("start-time");
-	assert.equal(getStartTime(), "", "start time is set");
-	});
-		
-QUnit.test("option selected for bedtime is set to variable", function(assert) {
-	var $bed = document.getElementById("bedtime");
-	assert.equal(getBedtime(), "", "bedtime is set");
-	});
+});
 
-QUnit.test("option selected for end time is set to variable", function(assert) {
-	var $end = document.getElementById("end-time");
-	assert.equal(getEndTime(), "", "end time is set");
-	});
-
-QUnit.test("submit button is disabled by default", function(assert) {
-	assert.ok($('input:submit').attr('disabled'), "submit button is disabled by default");
-	});
-
-
-	
-	
-	QUnit.test("option selection change", function(assert) {
-		var startVal = $('#start-time').val();
-		var bedVal = $('#bedtime').val();
-		var endVal = $('#end-time').val();
-		var doc = $(document);
-		doc.trigger($.Event("change", {startVal: 5, bedVal: 5, endVal: 5}));
-		assert.ok($('input:submit').attr('disabled'), "selections are number sna button is enabled");
-		});
-
-
-/*QUnit.test("function converts value string to number", function(assert) {
+QUnit.test("function converts value string to number", function(assert) {
 	assert.equal(convertValue("0"), 0, "Number is " + 0);
 	assert.equal(convertValue("11"), 11, "Number is " + 11);
 });
 
-QUnit.test("calculate pay for shift segment, should return a positive number or zero", function(assert) {
+QUnit.module("functions to assign times to variables", function() {	
+QUnit.test("option selected for start time is is initially an empty string and is set to variable", function(assert) {
+	var $start = document.getElementById("start-time");
+	assert.equal(getStartTime(), "", "start time is set");
+	});
+		
+QUnit.test("option selected for bedtime is initially an empty string and is set to variable", function(assert) {
+	var $bed = document.getElementById("bedtime");
+	assert.equal(getBedtime(), "", "bedtime is set");
+	});
+
+QUnit.test("option selected for end time is is initially an empty string and is set to variable", function(assert) {
+	var $end = document.getElementById("end-time");
+	assert.equal(getEndTime(), "", "end time is set");
+	});
+});
+
+QUnit.test("submit button is disabled by default", function(assert) {
+	assert.equal(document.getElementById('submitButton').disabled, true, "button is disabled by default");
+});
+
+QUnit.module("checks to make sure times are valid", function() {
+QUnit.test("checks to see if startTime is valid", function(assert) {
+	assert.equal(isStartTimeValid(3, 4, 8), true, "startTime is valid");
+	assert.equal(isStartTimeValid(3, 2, 8), false, "startTime is not valid");
+	assert.equal(isStartTimeValid(3, 4, 1), false, "startTime is not valid");
+	assert.equal(isStartTimeValid("", 4, 8), false, "startTime is not valid");
+	assert.equal(isStartTimeValid("na", 4, 8), false, "startTime is not valid");
+	});
+	
+	QUnit.test("checks to see if endTime is valid", function(assert) {
+	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
+	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
+	assert.equal(isEndTimeValid(3, 1), false, "endTime is not valid");
+	assert.equal(isEndTimeValid(3, ""), false, "endTime is not valid");
+	assert.equal(isEndTimeValid(3, "na"), false, "endTime is not valid");
+	});
+	
+	QUnit.test("checks to see if bedtime is valid", function(assert) {
+	assert.equal(isBedtimeValid(3, 8), true, "bedtime is valid");
+	assert.equal(isBedtimeValid(3, 1), false, "bedtime is no valid");
+	assert.equal(isBedtimeValid(3, ""), false, "bedtime is not valid");
+	assert.equal(isBedtimeValid(3, "na"), true, "bedtime is valid");
+	});
+	
+	QUnit.test("checks to see if bedtime is before midnight", function(assert) {
+		assert.equal(isBedtimeBefore12(4), true, "bedtime is before midnight");
+		assert.equal(isBedtimeBefore12(8), false, "bedtime is after midnight");
+	});
+});
+
+
+/*QUnit.test("calculate pay for shift segment, should return a positive number or zero", function(assert) {
 	
 	assert.equal(getSegmentPay(1, 4, earlyRate), 36, "Early pay rate is " + 36);  //1==6pm, 4==9pm
 	assert.equal(getSegmentPay(4, 7, midRate), 24, "Mid pay rate is " + 24);		//4==9pm, 7==12am	

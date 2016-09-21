@@ -12,81 +12,128 @@ var midRate = 8;
 //Pay rate from 12 am to 4 am
 var lateRate = 16;
 
+// Get the modal
+var bmodal = document.getElementById('bedtimeModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
 var startTime, endTime, bedtime, totalPay, shift1Pay, shift2Pay, shift3Pay, html;
 
 
+/*function checkBedtime() {
+	if($('#bedtime').val() > $('#start-time').val() || $('#bedtime').val() === "na") {
+		return true;
+	}
+	return false;
+}
+*/
 
-
-
-
+//Converts option string value to number
+function convertValue(string) {
+	var number = parseInt(string);
+	return number;
+}
 
 //Sets start time 
 function getStartTime() {
 	startTime = $start.options[$start.selectedIndex].value;
-	console.log("start time: " + startTime)
+	if(startTime !== "") {
+		startTime = convertValue(startTime);
+		}
+	console.log("start time: " + startTime);
 	return startTime;
 }
 
 //Sets bedtime
 function getBedtime() {
 	bedtime = $bed.options[$bed.selectedIndex].value;
-	console.log("bedtime: " + bedtime);
+	if(bedtime !== "" && bedtime !== "na") {
+		bedtime = convertValue(bedtime);
+		}
+		console.log("bedtime: " + bedtime);
 	return bedtime;
 	}
 
 //Sets end time
 function getEndTime() {
 	endTime = $end.options[$end.selectedIndex].value;
-	console.log("end time: " + endTime);
+	if(endTime !== "") {
+		endTime = convertValue(endTime);
+		}
+		console.log("end time: " + endTime);
 	return endTime;
 }
+
+//Checks if startTime is valid or not
+function isStartTimeValid(starttime, bedtime, endtime) {
+	if (typeof starttime === 'number' && starttime <= bedtime && starttime < endtime) {
+		return true;
+		}
+		return false;
+	}
+
+//Checks if endTime is valid or not
+function isEndTimeValid(starttime, endtime) {
+	if (typeof endtime === 'number' && endtime > starttime) {
+		return true;
+		}
+		return false;
+	}
+	
+//Checks if bedtime is valid or not
+function isBedtimeValid(starttime, bedtime) {
+	if (bedtime === "" || starttime > bedtime) {
+		return false;
+		}
+		return true;
+	}
+	
+//Checks if bedtime is before midnight
+function isBedtimeBefore12(time) {
+	 if(time < 7) {
+		 return true;
+		 }
+		 return false;
+	}
+
 
 
 //Start of function calls
 
 //Submit button is disabled by default
-$('input:submit').attr('disabled', true);
+//$('input:submit').attr('disabled', false);
+document.getElementById('submitButton').disabled = true;
 
 $('#start-time, #bedtime, #end-time').change(
   function() {
     if($('#start-time').val() && $('#bedtime').val() && $('#end-time').val()) {
-      $('input:submit').attr('disabled', false);
-    } else {
-      $('input:submit').attr('disabled', true);
+     document.getElementById('submitButton').disabled = false;
+}
+    else {
+      document.getElementById('submitButton').disabled = true;
     }
-  }
-);
+  });
+
+
+
 
 /*
-
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
+// 
+$('#start-time, #bedtime').change(
+if($('#bedtime').val() <= $().val() || $('#bedtime').val() === "na") {
+    bmodal.style.display = "block";
+} else {
+	bmodal.style.display = "none";
 }
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
+);
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == bmodal) {
+        bmodal.style.display = "none";
     }
 }
-
-
 */
 
 
@@ -104,13 +151,10 @@ window.onclick = function(event) {
 
 
 
+
 /*
 
-//Converts option string value to number
-function convertValue(string) {
-	var number = parseInt(string);
-	return number;
-}
+
 
 //Calculates pay for shift segment
 function getSegmentPay(time1, time2, payrate) {
