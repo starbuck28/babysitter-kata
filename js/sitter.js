@@ -99,7 +99,9 @@ $('#submitButton').click(function() {
 	endTime = convertValue(endTime);
 	console.log(bedtime);
 	console.log(endTime);
-	
+	if (!isStartTimeValid(startTime, endTime)) {
+		$(".results").html(errorMessage());
+		}
 	
 	
 	});
