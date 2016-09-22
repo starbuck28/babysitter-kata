@@ -31,9 +31,10 @@ QUnit.test("submit-button exists", function(assert) {
 	});
 });
 
-QUnit.test("function converts value string to number", function(assert) {
+QUnit.test("function converts value string to number unless value is na", function(assert) {
 	assert.equal(convertValue("0"), 0, "Number is " + 0);
 	assert.equal(convertValue("11"), 11, "Number is " + 11);
+	assert.equal(convertValue("na"), "na", "Value is 'na'");
 });
 
 QUnit.module("functions to assign times to variables", function() {	
@@ -62,10 +63,9 @@ QUnit.test("checks to see if startTime is valid", function(assert) {
 	assert.equal(isStartTimeValid(3, 4, 8), true, "startTime is valid");
 	assert.equal(isStartTimeValid(3, 4, 1), false, "startTime is not valid");
 	assert.equal(isStartTimeValid("", 4, 8), false, "startTime is not valid");
-	assert.equal(isStartTimeValid("na", 4, 8), false, "startTime is not valid");
 	});
 	
-	QUnit.test("checks to see if endTime is valid", function(assert) {
+QUnit.test("checks to see if endTime is valid", function(assert) {
 	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
 	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
 	assert.equal(isEndTimeValid(3, 1), false, "endTime is not valid");
@@ -73,12 +73,12 @@ QUnit.test("checks to see if startTime is valid", function(assert) {
 	assert.equal(isEndTimeValid(3, "na"), false, "endTime is not valid");
 	});
 	
-	QUnit.test("checks to see if bedtime is valid", function(assert) {
-	assert.equal(isBedtimeValid(3, 8), true, "bedtime is valid");
-	assert.equal(isBedtimeValid(3, ""), false, "bedtime is not valid");
-	assert.equal(isBedtimeValid(3, "na"), true, "bedtime is valid");
+QUnit.test("checks to see if bedtime is valid", function(assert) {
+	assert.equal(isBedtimeValid(8), true, "bedtime is valid");
+	assert.equal(isBedtimeValid(""), false, "bedtime is not valid");
+	assert.equal(isBedtimeValid("na"), true, "bedtime is valid");
 	});
-	
+
 });
 
 

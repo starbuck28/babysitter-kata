@@ -23,37 +23,29 @@ var startTime, endTime, bedtime, totalPay, shift1Pay, shift2Pay, shift3Pay, html
 
 //Converts option string value to number
 function convertValue(string) {
-	var number = parseInt(string);
-	return number;
+	if (string === "na") {
+		return string;
+	} else {
+	string = parseInt(string);
+	return string;
+	}
 }
 
 //Sets start time 
 function getStartTime() {
 	startTime = $start.options[$start.selectedIndex].value;
-	if(startTime !== "") {
-		startTime = convertValue(startTime);
-		}
-	console.log("start time: " + startTime);
 	return startTime;
 }
 
 //Sets bedtime
 function getBedtime() {
 	bedtime = $bed.options[$bed.selectedIndex].value;
-	if(bedtime !== "" && bedtime !== "na") {
-		bedtime = convertValue(bedtime);
-		}
-		console.log("bedtime: " + bedtime);
 	return bedtime;
 	}
 
 //Sets end time
 function getEndTime() {
 	endTime = $end.options[$end.selectedIndex].value;
-	if(endTime !== "") {
-		endTime = convertValue(endTime);
-		}
-		console.log("end time: " + endTime);
 	return endTime;
 }
 
@@ -74,33 +66,39 @@ function isEndTimeValid(starttime, endtime) {
 	}
 	
 //Checks if bedtime is valid or not
-function isBedtimeValid(starttime, bedtime) {
-	if (bedtime === "") {
-		return false;
-		}
+function isBedtimeValid(bedtime) {
+	if (typeof bedtime === 'number' || bedtime === "na") {
 		return true;
+		}
+		return false;
 	}
-
-
-//Start of function calls
+	
 
 //Submit button is disabled by default
-//$('input:submit').attr('disabled', false);
 document.getElementById('submitButton').disabled = true;
 
-$('#start-time, #bedtime, #end-time').change(
-  function() {
-    if($('#start-time').val() && $('#bedtime').val() && $('#end-time').val()) {
-     document.getElementById('submitButton').disabled = false;
-}
-    else {
+$('#start-time, #bedtime, #end-time').change(function() {
+		if ($('#start-time').val() && $('#bedtime').val() && $('#end-time').val()) {
+		document.getElementById('submitButton').disabled = false;
+		} else {
       document.getElementById('submitButton').disabled = true;
     }
-  });
+	});
 
-
-
-
+//When submit button is clicked, the functions run	
+$('#submitButton').click(function() {
+	
+	getStartTime();
+	getBedtime();
+	getEndTime();
+	startTime = convertValue(startTime);
+	bedtime = convertValue(bedtime);
+	endTime = convertValue(endTime);
+	console.log(bedtime);
+	console.log(endTime);
+	});
+	
+	
 /*
 // 
 $('#start-time, #bedtime').change(
