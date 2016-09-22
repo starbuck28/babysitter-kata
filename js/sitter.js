@@ -76,6 +76,12 @@ function isBedtimeValid(bedtime) {
 function errorMessage() {
 	return '<p>Error: The combination of times you selected is invalid. Please try again.</p>';
 	}
+	
+//Calculates pay for shift segment
+function getSegmentPay(time1, time2, payrate) {
+	var segmentPay = (time2 - time1) * payrate;
+	return segmentPay;
+}
 
 //Submit button is disabled by default
 document.getElementById('submitButton').disabled = true;
@@ -102,7 +108,20 @@ $('#submitButton').click(function() {
 	if (!isStartTimeValid(startTime, endTime)) {
 		$(".results").html(errorMessage());
 		}
-	
+	if ((bedtime < startTime || bedtime === "na") && endTime > midnight) {
+		shift1Pay = getSegmentPay(startTime, midnight, earlyRate);
+		shift2Pay = 0;
+		shift3Pay = getSegmentPay(midnight, endTime, lateRate);
+		console.log(shift1Pay);
+		console.log(shift3Pay);
+		}
+	if (bedtime > endTime || (bedtime === "na" && endtime <= midnight)) {
+		shift1Pay = getSegmentPay(startTime, bedtime, earlyRate);
+		shift2Pay = 0;
+		shift3Pay = 0;
+		console.log(shift1Pay);
+		console.log(shift2Pay);
+		}
 	
 	});
 	
@@ -145,11 +164,7 @@ window.onclick = function(event) {
 
 
 
-//Calculates pay for shift segment
-function getSegmentPay(time1, time2, payrate) {
-	var segmentPay = (time2 - time1) * payrate;
-	return segmentPay;
-}
+
 
 
 //Calculates total pay
