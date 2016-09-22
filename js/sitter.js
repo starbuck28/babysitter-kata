@@ -50,7 +50,7 @@ function getEndTime() {
 }
 
 //Checks if startTime is valid or not
-function isStartTimeValid(starttime, bedtime, endtime) {
+function isStartTimeValid(starttime, endtime) {
 	if (typeof starttime === 'number' && starttime < endtime) {
 		return true;
 		}
@@ -73,6 +73,9 @@ function isBedtimeValid(bedtime) {
 		return false;
 	}
 	
+function errorMessage() {
+	return '<p>Error: The combination of times you selected is invalid. Please try again.</p>';
+	}
 
 //Submit button is disabled by default
 document.getElementById('submitButton').disabled = true;
@@ -96,6 +99,9 @@ $('#submitButton').click(function() {
 	endTime = convertValue(endTime);
 	console.log(bedtime);
 	console.log(endTime);
+	
+	
+	
 	});
 	
 	
