@@ -60,7 +60,6 @@ QUnit.test("submit button is disabled by default", function(assert) {
 QUnit.module("checks to make sure times are valid", function() {
 QUnit.test("checks to see if startTime is valid", function(assert) {
 	assert.equal(isStartTimeValid(3, 4, 8), true, "startTime is valid");
-	assert.equal(isStartTimeValid(3, 2, 8), false, "startTime is not valid");
 	assert.equal(isStartTimeValid(3, 4, 1), false, "startTime is not valid");
 	assert.equal(isStartTimeValid("", 4, 8), false, "startTime is not valid");
 	assert.equal(isStartTimeValid("na", 4, 8), false, "startTime is not valid");
@@ -76,15 +75,10 @@ QUnit.test("checks to see if startTime is valid", function(assert) {
 	
 	QUnit.test("checks to see if bedtime is valid", function(assert) {
 	assert.equal(isBedtimeValid(3, 8), true, "bedtime is valid");
-	assert.equal(isBedtimeValid(3, 1), false, "bedtime is no valid");
 	assert.equal(isBedtimeValid(3, ""), false, "bedtime is not valid");
 	assert.equal(isBedtimeValid(3, "na"), true, "bedtime is valid");
 	});
 	
-	QUnit.test("checks to see if bedtime is before midnight", function(assert) {
-		assert.equal(isBedtimeBefore12(4), true, "bedtime is before midnight");
-		assert.equal(isBedtimeBefore12(8), false, "bedtime is after midnight");
-	});
 });
 
 

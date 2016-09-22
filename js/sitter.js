@@ -21,14 +21,6 @@ var span = document.getElementsByClassName("close")[0];
 var startTime, endTime, bedtime, totalPay, shift1Pay, shift2Pay, shift3Pay, html;
 
 
-/*function checkBedtime() {
-	if($('#bedtime').val() > $('#start-time').val() || $('#bedtime').val() === "na") {
-		return true;
-	}
-	return false;
-}
-*/
-
 //Converts option string value to number
 function convertValue(string) {
 	var number = parseInt(string);
@@ -67,7 +59,7 @@ function getEndTime() {
 
 //Checks if startTime is valid or not
 function isStartTimeValid(starttime, bedtime, endtime) {
-	if (typeof starttime === 'number' && starttime <= bedtime && starttime < endtime) {
+	if (typeof starttime === 'number' && starttime < endtime) {
 		return true;
 		}
 		return false;
@@ -83,20 +75,11 @@ function isEndTimeValid(starttime, endtime) {
 	
 //Checks if bedtime is valid or not
 function isBedtimeValid(starttime, bedtime) {
-	if (bedtime === "" || starttime > bedtime) {
+	if (bedtime === "") {
 		return false;
 		}
 		return true;
 	}
-	
-//Checks if bedtime is before midnight
-function isBedtimeBefore12(time) {
-	 if(time < 7) {
-		 return true;
-		 }
-		 return false;
-	}
-
 
 
 //Start of function calls
