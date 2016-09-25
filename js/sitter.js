@@ -13,15 +13,6 @@ var $start = document.getElementById("start-time");
 var $bed = document.getElementById("bedtime");
 var $end = document.getElementById("end-time");
 
-// Get the modal
-var bmodal = document.getElementById('bedtimeModal');
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-
-
-
 //Converts option string value to number
 function convertValue(string) {
 	if (string !== "na") {
@@ -78,7 +69,9 @@ function showResults(pay) {
 //Submit button is disabled by default
 document.getElementById('submitButton').disabled = true;
 
+//When a selection is changed
 $('#start-time, #bedtime, #end-time').change(function() {
+		//If they all have values, enables button
 		if ($('#start-time').val() && $('#bedtime').val() && $('#end-time').val()) {
 		document.getElementById('submitButton').disabled = false;
 		} else {
@@ -92,75 +85,53 @@ $('#submitButton').click(function() {
 	getStartTime();
 	getBedtime();
 	getEndTime();
+	
 	startTime = convertValue(startTime);
 	bedtime = convertValue(bedtime);
 	endTime = convertValue(endTime);
-	console.log(bedtime);
-	console.log(endTime);
+	
+	//If start time is not valid displays error
 	if (!isStartTimeValid(startTime, endTime)) {
 		$(".results").html(errorMessage());
 		totalPay = 0;
 		} 
 		
-		 if (bedtime >= endTime && endTime > startTime) {
-			 shift1Pay = getSegmentPay(startTime, endTime, earlyRate);
-			shift2Pay = 0;
-			shift3Pay = 0;
-			console.log(bedtime);
-			console.log("shift1: " + shift1Pay);
-		    console.log("shift2: " + shift2Pay);
-		    console.log("shift3: " + shift3Pay);
-			 } else if (bedtime === "na" && endTime <= midnight) {
+		//Assigns pay for each shift dependent on times selected
+	   if (bedtime >= endTime && endTime > startTime) {
+		  shift1Pay = getSegmentPay(startTime, endTime, earlyRate); 
+		  shift2Pay = 0;
+		  shift3Pay = 0;
+		 } else if (bedtime === "na" && endTime <= midnight) {
 			 bedtime = endTime;
 			 shift1Pay = getSegmentPay(startTime, endTime, earlyRate);
 			 shift2Pay = 0;
 			 shift3Pay = 0;
-			console.log(bedtime);
-			console.log("shift1: " + shift1Pay);
-		  	console.log("shift2: " + shift2Pay);
-		  	console.log("shift3: " + shift3Pay);
 		} else if (bedtime > startTime && endTime < midnight) {
-		shift1Pay = getSegmentPay(startTime, bedtime, earlyRate);
-		shift2Pay = getSegmentPay(bedtime, endTime, midRate);
-		shift3Pay = 0;
-		console.log("shift1: " + shift1Pay);
-		console.log("shift2: " + shift2Pay);
-		console.log("shift3: " + shift3Pay);
+			shift1Pay = getSegmentPay(startTime, bedtime, earlyRate);
+			shift2Pay = getSegmentPay(bedtime, endTime, midRate);
+			shift3Pay = 0;
 		} else if (bedtime <= startTime && endTime <= midnight) {
 			shift1Pay = 0;
 			shift2Pay = getSegmentPay(startTime, endTime, midRate);
 			shift3Pay = 0;
-			console.log("shift1: " + shift1Pay);
-			console.log("shift2: " + shift2Pay);
-			console.log("shift3: " + shift3Pay);
 		} else if (bedtime === "na" && endTime > midnight) {
-		shift1Pay = getSegmentPay(startTime, midnight, earlyRate);
-		shift2Pay = 0;
-		shift3Pay = getSegmentPay(midnight, endTime, lateRate);
-		console.log("shift1: " + shift1Pay);
-		console.log("shift2: " + shift2Pay);
-		console.log("shift3: " + shift3Pay);
+			shift1Pay = getSegmentPay(startTime, midnight, earlyRate);
+			shift2Pay = 0;
+			shift3Pay = getSegmentPay(midnight, endTime, lateRate);
 		} else if (bedtime <= startTime && endTime > midnight) {
 			shift1Pay = 0;
 			shift2Pay = getSegmentPay(startTime, midnight, midRate);
 			shift3Pay = getSegmentPay(midnight, endTime, lateRate);
-			console.log("shift1: " + shift1Pay);
-			console.log("shift2: " + shift2Pay);
-			console.log("shift3: " + shift3Pay);
 			}
-		else {
-		shift1Pay = getSegmentPay(startTime, bedtime, earlyRate);
-		shift2Pay = getSegmentPay(bedtime, midnight, midRate);
-		shift3Pay = getSegmentPay(midnight, endTime, lateRate);
-		console.log("shift1: " + shift1Pay);
-		console.log("shift2: " + shift2Pay);
-		console.log("shift3: " + shift3Pay);
-		}
-	
+		  else {
+			shift1Pay = getSegmentPay(startTime, bedtime, earlyRate);
+			shift2Pay = getSegmentPay(bedtime, midnight, midRate);
+			shift3Pay = getSegmentPay(midnight, endTime, lateRate);
+		  }
+	 //Calculates total pay 
 	if (totalPay !== 0) {
 			totalPay = calculateTotal(shift1Pay, shift2Pay, shift3Pay);
 			$('.results').html(showResults(totalPay));
-			console.log(totalPay);
 		}
 		
 });

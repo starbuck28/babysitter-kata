@@ -2,8 +2,6 @@
 A calculator that tells a babysitter how much they will be paid for working for a shift based on start time, end time, and children's bedtime
 */
 
-
-
 QUnit.test("sample test", function(assert) {
 assert.ok("1" == 1, "passed");
 });
@@ -64,20 +62,6 @@ QUnit.test("checks to see if startTime is valid", function(assert) {
 	assert.equal(isStartTimeValid(3, 1), false, "startTime is not valid");
 	assert.equal(isStartTimeValid("", 8), false, "startTime is not valid");
 	});
-	
-/*QUnit.test("checks to see if endTime is valid", function(assert) {
-	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
-	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
-	assert.equal(isEndTimeValid(3, 1), false, "endTime is not valid");
-	assert.equal(isEndTimeValid(3, ""), false, "endTime is not valid");
-	});
-	
-QUnit.test("checks to see if bedtime is valid", function(assert) {
-	assert.equal(isBedtimeValid(8), true, "bedtime is valid");
-	assert.equal(isBedtimeValid(""), false, "bedtime is not valid");
-	assert.equal(isBedtimeValid("na"), true, "bedtime is valid");
-	});*/
-});
 
 QUnit.test('displays error message for results div', function(assert) {
 	assert.equal(errorMessage(), '<p>Error: The combination of times you selected is invalid. Please try again.</p>', "error message displayed");

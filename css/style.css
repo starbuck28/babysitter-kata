@@ -3,7 +3,7 @@
 	-webkit-box-sizing: border-box;
 }
 
-.header, .attribution {
+.header, .attribution, .results p {
 	font-family: 'Open Sans', sans-serif;
 	color: #8c8c8c;
 	text-align: center;
@@ -70,8 +70,11 @@ input[type=button] {
 input[type=button]:hover {
 	background-color: #FF7F9F;
 }
-	
 
+.results {
+	margin-top: 40px;
+	}
+	
 .attribution {
 	padding: 50px 0 50px 0;
 }
