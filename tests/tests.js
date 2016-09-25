@@ -65,7 +65,7 @@ QUnit.test("checks to see if startTime is valid", function(assert) {
 	assert.equal(isStartTimeValid("", 8), false, "startTime is not valid");
 	});
 	
-QUnit.test("checks to see if endTime is valid", function(assert) {
+/*QUnit.test("checks to see if endTime is valid", function(assert) {
 	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
 	assert.equal(isEndTimeValid(3, 8), true, "endTime is valid");
 	assert.equal(isEndTimeValid(3, 1), false, "endTime is not valid");
@@ -76,7 +76,7 @@ QUnit.test("checks to see if bedtime is valid", function(assert) {
 	assert.equal(isBedtimeValid(8), true, "bedtime is valid");
 	assert.equal(isBedtimeValid(""), false, "bedtime is not valid");
 	assert.equal(isBedtimeValid("na"), true, "bedtime is valid");
-	});
+	});*/
 });
 
 QUnit.test('displays error message for results div', function(assert) {
@@ -88,15 +88,13 @@ QUnit.test("calculate pay for shift segment, should return a positive number or 
 	assert.equal(getSegmentPay(4, 7, midRate), 24, "Mid pay rate is " + 24);		//4==9pm, 7==12am	
 	assert.equal(getSegmentPay(7, 9, lateRate), 32, "Late pay rate is " + 32);	//7==12am, 9==2am
 });
-/*
 
 QUnit.test("calculates total pay", function(assert) {
 	assert.equal(calculateTotal(36, 24, 32), 92, "Total pay is " + 92 );
 });
 
-
 QUnit.test("sets html for total pay in results div", function(assert) {
-	assert.equal(showResults(100), html, "html is set for results div" );
+	assert.equal(showResults(100), '<p>You will be paid $' + 100 + ' for this shift.</p>', "html is set for results div" );
 	});
 
-*/
+

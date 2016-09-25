@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
 .header, .attribution {
@@ -7,20 +8,33 @@
 	color: #8c8c8c;
 	text-align: center;
 	font-size: 1em;
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 50px;
 	}
 	
-	.header h1 {
-		padding: 50px 0 30px 0;
+	h1 {
+		padding: 50px 0 10px 0;
 	}
 	
-	.header h3 {
-		padding-bottom: 40px;
+	p, li {
+		text-align: left;
 	}
-
+	
+	li {
+		margin-top: 10px;
+		}
+	
+	ul {
+		list-style: circle
+		}
+	
 	
 img {
+	display: block;
 	width: 80%;
-	margin-bottom: 10px;
+	margin: 0 auto;
+	margin-bottom: 20px;
 	}
 	
 #time-form {
@@ -64,6 +78,10 @@ input[type=button]:hover {
 
 
 @media (min-width: 768px) {
+	.header {
+		width: 60%;
+		}
+	
 	img {
 		width: 50%;
 	}
@@ -74,24 +92,38 @@ input[type=button]:hover {
 }
 
 @media (min-width: 900px) {
+	.header {
+		width: 70%;
+		}
+	
+	.instructions {
+		display:block;
+		margin: 0 auto;
+		}
+		
 	.wrapper-2 {
 		display: flex;
-		align-items: flex-start;
-	justify-content: center;	
-	margin: 0 auto;
-	width: 670px;
+		display: -webkit-flex;
+		width: 70%;
+		margin: 0 auto;
+		height: 335px;
+		align-items: stretch;
+		align-content: stretch;
 	}
 	
 	img {
 		
 		margin: 0 auto;
 		margin-right: 10px;
+		margin-bottom: 0px;
+		-webkit-flex: 1;
 		flex: 1;
 	}
 	
 	#time-form {
 		margin: 0 auto;
-		margin-left: 10px;	
+		margin-left: 10px;
+		-webkit-flex: 1;
 		flex: 1;
 	}
 }
