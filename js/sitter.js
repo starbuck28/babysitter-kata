@@ -132,6 +132,8 @@ $('#submitButton').click(function() {
 	if (totalPay !== 0) {
 			totalPay = calculateTotal(shift1Pay, shift2Pay, shift3Pay);
 			$('.results').html(showResults(totalPay));
-		}
+		} else {
+			totalPay = false;
+			}
 		
 });
